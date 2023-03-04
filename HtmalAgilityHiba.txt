@@ -1,0 +1,1 @@
+a cssselector kiegeszito atirja az includokat ugy h a htmlagility verzioja es helye megvaltozik es van h az app.configban nem irodik at a htmlagility dependency ezert onnan siman ki kell torolni

@@ -13,6 +13,8 @@ using Adevarul.Cikkek;
 using AdatbazisFunkciok;
 using Euractiv.Cikkek;
 using Intellinews.Cikkek;
+using SegedFunkciok;
+using System.IO;
 
 namespace AdatBanyaszForm
 {
@@ -28,6 +30,7 @@ namespace AdatBanyaszForm
                 "intellinews.com"
             });
             websiteComboBox.SelectedIndex = 0;
+            FajlKezelo.MAPPA_ELERESI_UTVONAL = "D:\\Projects\\Catalyst";
         }
 
         private void pageCountTextBox_TextChanged(object sender, EventArgs e)

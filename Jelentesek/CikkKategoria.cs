@@ -125,6 +125,7 @@ namespace Jelentesek
             List<CikkKategoria> kategoriak = new List<CikkKategoria>();
             while (beolvaso.Read())
                 kategoriak.Add((CikkKategoria)Activator.CreateInstance(typeof(CikkKategoria), beolvaso));
+            beolvaso.Close();
             adatbazisKapcsolat.Close();
             return kategoriak;
         }

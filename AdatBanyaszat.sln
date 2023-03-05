@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdatbazisFunkciok", "..\SegedProjektek\AdatbazisFunkciok\AdatbazisFunkciok.csproj", "{D573C379-04C6-49B3-9380-B890187741FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdatbazisFunkciok", "..\csharp-seged-projektek\AdatbazisFunkciok\AdatbazisFunkciok.csproj", "{D573C379-04C6-49B3-9380-B890187741FF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SegedProjektek", "SegedProjektek", "{BDF28383-3FB2-4B1B-99E9-53E6508DC5E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SegedFunkciok", "..\SegedProjektek\SegedFunkciok\SegedFunkciok.csproj", "{D7CB8321-DAB1-42AE-A51B-6DCA83CA12CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SegedFunkciok", "..\csharp-seged-projektek\SegedFunkciok\SegedFunkciok.csproj", "{D7CB8321-DAB1-42AE-A51B-6DCA83CA12CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlSegedFunkciok", "..\SegedProjektek\HtmlSegedFunkciok\HtmlSegedFunkciok.csproj", "{5D85635B-8C9A-4E50-A316-41399A4CE1B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlSegedFunkciok", "..\csharp-seged-projektek\HtmlSegedFunkciok\HtmlSegedFunkciok.csproj", "{5D85635B-8C9A-4E50-A316-41399A4CE1B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlAdatKigyujtes", "..\SegedProjektek\HtmlAdatKigyujtes\HtmlAdatKigyujtes.csproj", "{D13EC061-E05A-4028-A162-1F2D68BC516D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlAdatKigyujtes", "..\csharp-seged-projektek\HtmlAdatKigyujtes\HtmlAdatKigyujtes.csproj", "{D13EC061-E05A-4028-A162-1F2D68BC516D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormosWeboldalForraskodKigyujtes", "..\SegedProjektek\FormosWeboldalForraskodKigyujtes\FormosWeboldalForraskodKigyujtes.csproj", "{C8477580-DC42-4DFF-B849-4C88582129E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormosWeboldalForraskodKigyujtes", "..\csharp-seged-projektek\FormosWeboldalForraskodKigyujtes\FormosWeboldalForraskodKigyujtes.csproj", "{C8477580-DC42-4DFF-B849-4C88582129E6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jelentesek", "Jelentesek\Jelentesek.csproj", "{96FE7CEF-CCCF-47A0-8022-7AA0D5800C09}"
 EndProject

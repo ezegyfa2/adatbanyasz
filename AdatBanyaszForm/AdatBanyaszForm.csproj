@@ -80,9 +80,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SegedProjektek\AdatbazisFunkciok\AdatbazisFunkciok.csproj">
-      <Project>{d573c379-04c6-49b3-9380-b890187741ff}</Project>
+    <ProjectReference Include="..\..\csharp-seged-projektek\AdatbazisFunkciok\AdatbazisFunkciok.csproj">
+      <Project>{D573C379-04C6-49B3-9380-B890187741FF}</Project>
       <Name>AdatbazisFunkciok</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\csharp-seged-projektek\SegedFunkciok\SegedFunkciok.csproj">
+      <Project>{D7CB8321-DAB1-42AE-A51B-6DCA83CA12CC}</Project>
+      <Name>SegedFunkciok</Name>
     </ProjectReference>
     <ProjectReference Include="..\Adevarul\Adevarul.csproj">
       <Project>{9070f53f-e0ab-4b21-b4fb-386f169827fc}</Project>

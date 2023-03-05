@@ -14,7 +14,6 @@ namespace Intellinews.Osszefoglalok
     {
         public IntellinewsOsszefoglaloJelentes()
         {
-            ExprotalandoFajlEleresiUtvonal = System.IO.Path.Combine(IntellinewsOsszefoglalo.MAPPA_ELERESI_UTVONAL, "Sajto jelentes.pdf");
         }
 
         public override string ExportFejlecKepEleresiUtvonal

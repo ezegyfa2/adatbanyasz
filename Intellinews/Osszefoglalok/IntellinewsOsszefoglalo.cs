@@ -86,7 +86,7 @@ namespace Intellinews.Osszefoglalok
                 int ev = Int32.Parse(datumSzovegReszek[2]);
                 int honap = Honapok().FindIndex(aktHonap => aktHonap == honapSzoveg);
                 int nap = Int32.Parse(datumSzovegReszek[1]);
-                Datum = new DateTime(ev, honap, nap);
+                Datum = new DateTime(ev, honap + 1, nap);
             }
         }
 

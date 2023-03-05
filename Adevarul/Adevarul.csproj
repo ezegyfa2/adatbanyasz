@@ -142,20 +142,20 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SegedProjektek\AdatbazisFunkciok\AdatbazisFunkciok.csproj">
-      <Project>{d573c379-04c6-49b3-9380-b890187741ff}</Project>
+    <ProjectReference Include="..\..\csharp-seged-projektek\AdatbazisFunkciok\AdatbazisFunkciok.csproj">
+      <Project>{D573C379-04C6-49B3-9380-B890187741FF}</Project>
       <Name>AdatbazisFunkciok</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\SegedProjektek\FormosWeboldalForraskodKigyujtes\FormosWeboldalForraskodKigyujtes.csproj">
-      <Project>{c8477580-dc42-4dff-b849-4c88582129e6}</Project>
+    <ProjectReference Include="..\..\csharp-seged-projektek\FormosWeboldalForraskodKigyujtes\FormosWeboldalForraskodKigyujtes.csproj">
+      <Project>{C8477580-DC42-4DFF-B849-4C88582129E6}</Project>
       <Name>FormosWeboldalForraskodKigyujtes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\SegedProjektek\HtmlAdatKigyujtes\HtmlAdatKigyujtes.csproj">
+    <ProjectReference Include="..\..\csharp-seged-projektek\HtmlAdatKigyujtes\HtmlAdatKigyujtes.csproj">
       <Project>{d13ec061-e05a-4028-a162-1f2d68bc516d}</Project>
       <Name>HtmlAdatKigyujtes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\SegedProjektek\SegedFunkciok\SegedFunkciok.csproj">
-      <Project>{d7cb8321-dab1-42ae-a51b-6dca83ca12cc}</Project>
+    <ProjectReference Include="..\..\csharp-seged-projektek\SegedFunkciok\SegedFunkciok.csproj">
+      <Project>{D7CB8321-DAB1-42AE-A51B-6DCA83CA12CC}</Project>
       <Name>SegedFunkciok</Name>
     </ProjectReference>
     <ProjectReference Include="..\CikkKigyujtes\CikkKigyujtes.csproj">

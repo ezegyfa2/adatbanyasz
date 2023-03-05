@@ -32,13 +32,16 @@ namespace Jelentesek
                 switch (args.Length)
                 {
                     case 0:
-                        Export(megnyitasExportUtan);
+                        Export("Sajto jelentes.pdf", megnyitasExportUtan);
                         break;
                     case 1:
-                        Export(DateTime.Parse(args[0]), megnyitasExportUtan);
+                        Export(args[0], megnyitasExportUtan);
                         break;
                     case 2:
-                        Export(DateTime.Parse(args[0]), DateTime.Parse(args[1]), megnyitasExportUtan);
+                        Export(DateTime.Parse(args[1]), args[0], megnyitasExportUtan);
+                        break;
+                    case 3:
+                        Export(DateTime.Parse(args[1]), DateTime.Parse(args[2]), args[0], megnyitasExportUtan);
                         break;
                     default:
                         throw new Exception("Hibas parameterek. Parameterkent megadhato a kezdeti es a veg datum tovabba, hogy az exportalt fajl megnyitodjon-e a muvelet befejeztevel");
@@ -68,9 +71,9 @@ namespace Jelentesek
             }
         }
 
-        public void Export(bool megnyitasExportUtan = true)
+        public void Export(string fileNev = "Sajto jelentes.pdf", bool megnyitasExportUtan = true)
         {
-            Export(legkorabbiDatum, legkesobbiDatum, megnyitasExportUtan);
+            Export(legkorabbiDatum, legkesobbiDatum, fileNev, megnyitasExportUtan);
         }
 
         protected DateTime legkorabbiDatum
@@ -89,13 +92,16 @@ namespace Jelentesek
                     return lekertDatum;
                 }
                 else
+                {
+                    adatbazisKapcsolat.Close();
                     return new DateTime(1000, 1, 1);
+                }
             }
         }
 
-        public void Export(DateTime kezdetiDatum, bool megnyitasExportUtan = true)
+        public void Export(DateTime kezdetiDatum, string fileNev = "Sajto jelentes.pdf", bool megnyitasExportUtan = true)
         {
-            Export(kezdetiDatum, legkesobbiDatum, megnyitasExportUtan);
+            Export(kezdetiDatum, legkesobbiDatum, fileNev, megnyitasExportUtan);
         }
 
         protected DateTime legkesobbiDatum
@@ -114,11 +120,14 @@ namespace Jelentesek
                     return lekertDatum;
                 }
                 else
+                {
+                    adatbazisKapcsolat.Close();
                     return DateTime.Now;
+                }
             }
         }
 
-        public void Export(DateTime kezdetiDatum, DateTime vegsoDatum, bool megnyitasExportUtan = true)
+        public void Export(DateTime kezdetiDatum, DateTime vegsoDatum, string fileNev = "Sajto jelentes.pdf", bool megnyitasExportUtan = true)
         {
             HirTipus hir = new HirTipus();
             string lekeresQuery = query(hir.TablaNev, kezdetiDatum, vegsoDatum);
@@ -127,8 +136,9 @@ namespace Jelentesek
             List<HirTipus> hirOsszefoglalok = new List<HirTipus>();
             while (beolvaso.Read())
                 hirOsszefoglalok.Add((HirTipus)Activator.CreateInstance(typeof(HirTipus), beolvaso));
+            beolvaso.Close();
             adatbazisKapcsolat.Close();
-            Export(hirOsszefoglalok, kezdetiDatum, vegsoDatum, megnyitasExportUtan);
+            Export(hirOsszefoglalok, kezdetiDatum, vegsoDatum, fileNev, megnyitasExportUtan);
         }
 
         protected void exportFejlecBeallitasa(Document exportalandoDokumentum)
@@ -227,6 +237,6 @@ namespace Jelentesek
         }
 
         abstract public string ExportFejlecKepEleresiUtvonal { get; }
-        abstract public void Export(List<HirTipus> exportalandoHirOsszefoglalok, DateTime kezdetiDatum, DateTime vegsoDatum, bool megnyitasExportUtan = true);
+        abstract public void Export(List<HirTipus> exportalandoHirOsszefoglalok, DateTime kezdetiDatum, DateTime vegsoDatum, string fileNev = "Sajto jelentes.pdf", bool megnyitasExportUtan = true);
     }
 }

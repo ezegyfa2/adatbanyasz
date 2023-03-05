@@ -20,7 +20,6 @@ namespace Intellinews.Cikkek
         public IntellinewsCikkJelentes(CikkKategoria kategoria)
         {
             Kategoria = kategoria;
-            ExprotalandoFajlEleresiUtvonal = System.IO.Path.Combine(IntellinewsCikk.MAPPA_ELERESI_UTVONAL, "Sajto jelentes.pdf");
         }
 
         public override string ExportFejlecKepEleresiUtvonal

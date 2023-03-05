@@ -92,7 +92,11 @@ namespace Adevarul.Cikkek
         }
 
         protected override void cikkReszekBeallitasa(HtmlNode node)
-        {
+        { 
+            if (Focim.Contains("Elevii și studenții din București se pot programa online"))
+            {
+
+            }
             List<HtmlNode> cikkReszNodek = node.QuerySelectorAll("main > p, main > h2").OrderBy(cikkReszNode => cikkReszNode.StreamPosition).ToList();
             int pozicio = 0;
             foreach (HtmlNode cikkReszNode in cikkReszNodek)

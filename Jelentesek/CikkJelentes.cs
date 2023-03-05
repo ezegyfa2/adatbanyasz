@@ -9,11 +9,8 @@ namespace Jelentesek
 {
     abstract public class CikkJelentes<HirTipus> : Jelentes<HirTipus> where HirTipus : ExportalhatoAdat, new()
     {
-        public string ExprotalandoFajlEleresiUtvonal;
-
-        public override void Export(List<HirTipus> exportalandoAdatok, DateTime kezdetiDatum, DateTime vegsoDatum, bool megnyitasExportUtan = true)
+        public override void Export(List<HirTipus> exportalandoAdatok, DateTime kezdetiDatum, DateTime vegsoDatum, string fileNev = "Sajto jelentes.pdf", bool megnyitasExportUtan = true)
         {
-            string exprotalandoFajlEleresiUtvonal = ExprotalandoFajlEleresiUtvonal;
             Document exportalandoDokumentum = new Document();
             exportalandoDokumentum.AddSection();
             exportalandoDokumentum.Sections[0].PageSetup.HeaderDistance = 10;
@@ -25,7 +22,7 @@ namespace Jelentesek
             ExportalhatoAdat.ExportUjSor(exportalandoDokumentum);
             ExportalhatoAdat.ExportUjSor(exportalandoDokumentum);
             HirOsszefoglalokExportalasa(exportalandoDokumentum, exportalandoAdatok);
-            MentesPDFkent(exportalandoDokumentum, exprotalandoFajlEleresiUtvonal, megnyitasExportUtan);
+            MentesPDFkent(exportalandoDokumentum, fileNev, megnyitasExportUtan);
         }
 
         private void exportCimBeallitasa(Document exportalandoDokumentum, DateTime kezdetiDatum, DateTime vegsoDatum)

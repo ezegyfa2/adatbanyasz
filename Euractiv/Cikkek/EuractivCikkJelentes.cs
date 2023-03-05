@@ -20,7 +20,6 @@ namespace Euractiv.Cikkek
         public EuractivCikkJelentes(CikkKategoria kategoria)
         {
             Kategoria = kategoria;
-            ExprotalandoFajlEleresiUtvonal = System.IO.Path.Combine(EuractivCikk.MAPPA_ELERESI_UTVONAL, "Sajto jelentes.pdf");
         }
 
         public override string ExportFejlecKepEleresiUtvonal

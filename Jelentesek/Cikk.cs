@@ -1,5 +1,4 @@
 ﻿using AdatbazisFunkciok;
-using HtmlAdatKigyujtes;
 using HtmlAgilityPack;
 using MigraDoc.DocumentObjectModel;
 using MySql.Data.MySqlClient;
@@ -235,11 +234,28 @@ namespace Jelentesek
             {
                 foreach (CikkBekezdes bekezdes in Bekezdesek)
                 {
-                    bekezdes.Tarolas();
+                    int bekezdesId = bekezdes.Tarolas();
+                    if (bekezdesId == -1)
+                    {
+                        bekezdes.Szoveg = "";
+                        if (bekezdes.Tarolas() == -1)
+                        {
+                            throw new Exception("Nem lehet feltolteni a bekezdest");
+                        }
+                    }
                 }
                 foreach (CikkCim cim in Cimek)
                 {
-                    cim.Tarolas();
+                    int cimId = cim.Tarolas();
+                    if (cimId == -1)
+                    {
+                        cim.Szoveg = "";
+                        if (cim.Tarolas() == -1)
+                        {
+                            throw new Exception("Nem lehet feltolteni a cimet");
+                        }
+                        
+                    }
                 }
             }
             return cikkId;

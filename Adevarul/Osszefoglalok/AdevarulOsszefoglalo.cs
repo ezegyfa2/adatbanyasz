@@ -77,11 +77,11 @@ namespace Adevarul.Osszefoglalok
             }
             else
             {
-                string honapSzoveg = datumSzovegReszek[1];
+                string honapSzoveg = datumSzovegReszek[1].Replace(".", "");
                 int ev = Int32.Parse(datumSzovegReszek[2]);
                 int honap = Honapok().FindIndex(aktHonap => aktHonap == honapSzoveg);
                 int nap = Int32.Parse(datumSzovegReszek[0]);
-                Datum = new DateTime(ev, honap, nap);
+                Datum = new DateTime(ev, honap + 1, nap);
             }
         }
 
@@ -90,18 +90,18 @@ namespace Adevarul.Osszefoglalok
         {
             return new List<string>()
             {
-                "jan.",
-                "feb.",
-                "mart.",
-                "apr.",
-                "mai.",
-                "jun.",
-                "jul.",
-                "aug.",
-                "sept.",
-                "oct.",
-                "nov.",
-                "dec."
+                "ian",
+                "feb",
+                "mart",
+                "apr",
+                "mai",
+                "iun",
+                "iul",
+                "aug",
+                "sept",
+                "oct",
+                "nov",
+                "dec"
             };
         }
 

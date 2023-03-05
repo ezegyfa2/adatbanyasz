@@ -14,7 +14,6 @@ namespace Euractiv.Osszefoglalok
     {
         public EuractivOsszefoglaloJelentes()
         {
-            ExprotalandoFajlEleresiUtvonal = System.IO.Path.Combine(EuractivOsszefoglalo.MAPPA_ELERESI_UTVONAL, "Sajto jelentes.pdf");
         }
 
         public override string ExportFejlecKepEleresiUtvonal

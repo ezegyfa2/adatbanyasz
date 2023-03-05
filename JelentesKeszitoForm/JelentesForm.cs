@@ -29,17 +29,33 @@ namespace JelentesKeszitoForm
                 "intellinews.com"
             });
             websiteComboBox.SelectedIndex = 0;
-            pathTextBox.Text = "D:\\Projektek\\Ceg\\Erno\\Projekt filok";
+            pathTextBox.Text = "D:\\Projects\\Catalyst";
         }
 
         private void createButton_Click(object sender, EventArgs e)
         {
+            string kivalasztottKategoria = categoryComboBox.SelectedItem.ToString();
             switch (websiteComboBox.SelectedIndex)
             {
                 case 0:
                     Adatbazis.beallitas.Adatbazis = "adevarul";
-                    AdevarulCikkJelentes adevarulJelentes = new AdevarulCikkJelentes(categoryComboBox.SelectedItem.ToString());
-                    adevarulJelentes.Export();
+                    AdevarulCikkJelentes adevarulJelentes;
+                    if (kivalasztottKategoria == "All")
+                    {
+                        adevarulJelentes = new AdevarulCikkJelentes();
+                    }
+                    else
+                    {
+                        adevarulJelentes = new AdevarulCikkJelentes(categoryComboBox.SelectedItem.ToString());
+                    }
+                    //adevarulJelentes.Export();
+
+
+                    List<CikkKategoria> kategoriak = CikkKategoria.LekeresAdatbazisbol();
+                    foreach (CikkKategoria kategoria in kategoriak) {
+                        adevarulJelentes = new AdevarulCikkJelentes(kategoria);
+                        adevarulJelentes.Export(kategoria.Nev + ".pdf", false);
+                    }
                     break;
                 case 1:
                     Adatbazis.beallitas.Adatbazis = "euractive";
@@ -72,6 +88,7 @@ namespace JelentesKeszitoForm
                     break;
             }
             categoryComboBox.Items.Clear();
+            categoryComboBox.Items.Add("All");
             foreach (CikkKategoria kategoria in CikkKategoria.LekeresAdatbazisbol())
             {
                 categoryComboBox.Items.Add(kategoria.Nev);

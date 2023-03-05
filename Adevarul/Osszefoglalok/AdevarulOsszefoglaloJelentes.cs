@@ -20,7 +20,7 @@ namespace Adevarul.Osszefoglalok
             }
         }
 
-        public override void Export(List<AdevarulOsszefoglalo> exportalandoAdatok, DateTime kezdetiDatum, DateTime vegsoDatum, bool megnyitasExportUtan = true)
+        public override void Export(List<AdevarulOsszefoglalo> exportalandoAdatok, DateTime kezdetiDatum, DateTime vegsoDatum, string fileNev = "Sajto jelentes.pdf", bool megnyitasExportUtan = true)
         {
             string exprotalandoFajlEleresiUtvonal = System.IO.Path.Combine(AdevarulOsszefoglalo.MAPPA_ELERESI_UTVONAL, "Sajto jelentes.pdf");
             Document exportalandoDokumentum = new Document();

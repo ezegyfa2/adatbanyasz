@@ -18,7 +18,7 @@ namespace Adevarul.Cikkek
             Kategoria = new CikkKategoria(kategoriaNev);
         }
 
-        public AdevarulCikkJelentes(CikkKategoria kategoria)
+        public AdevarulCikkJelentes(CikkKategoria kategoria = null)
         {
             Kategoria = kategoria;
         }
@@ -31,9 +31,9 @@ namespace Adevarul.Cikkek
             }
         }
 
-        public override void Export(List<AdevarulCikk> exportalandoAdatok, DateTime kezdetiDatum, DateTime vegsoDatum, bool megnyitasExportUtan = true)
+        public override void Export(List<AdevarulCikk> exportalandoAdatok, DateTime kezdetiDatum, DateTime vegsoDatum, string fileNev = "Sajto jelentes.pdf", bool megnyitasExportUtan = true)
         {
-            string exprotalandoFajlEleresiUtvonal = System.IO.Path.Combine(AdevarulCikk.MAPPA_ELERESI_UTVONAL, "Sajto jelentes.pdf");
+            string exprotalandoFajlEleresiUtvonal = System.IO.Path.Combine(AdevarulCikk.MAPPA_ELERESI_UTVONAL, fileNev);
             Document exportalandoDokumentum = new Document();
             exportalandoDokumentum.AddSection();
             exportalandoDokumentum.Sections[0].PageSetup.HeaderDistance = 10;
@@ -71,7 +71,14 @@ namespace Adevarul.Cikkek
 
         protected override string query(string tablaNev, DateTime kezdetiDatum, DateTime vegsoDatum)
         {
-            return "SELECT * FROM " + tablaNev + " WHERE " + Kategoria.QueryFeltetel + " AND date BETWEEN \"" + kezdetiDatum.ToString(datumFormatum) + "\" AND \"" + vegsoDatum.ToString(datumFormatum) + "\"";
+            if (Kategoria == null)
+            {
+                return "SELECT * FROM " + tablaNev + " WHERE date BETWEEN \"" + kezdetiDatum.ToString(datumFormatum) + "\" AND \"" + vegsoDatum.ToString(datumFormatum) + "\"";
+            }
+            else
+            {
+                return "SELECT * FROM " + tablaNev + " WHERE " + Kategoria.QueryFeltetel + " AND date BETWEEN \"" + kezdetiDatum.ToString(datumFormatum) + "\" AND \"" + vegsoDatum.ToString(datumFormatum) + "\"";
+            }
         }
     }
 }

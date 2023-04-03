@@ -22,15 +22,22 @@ namespace Euractiv.Cikkek
 
         protected override string getExtension(string link)
         {
-            string[] linkReszek = link.Split('&');
-            foreach (string linkResz in linkReszek)
+            if (Path.GetExtension(link) == "")
             {
-                if (linkResz.Contains("f="))
+                string[] linkReszek = link.Split('&');
+                foreach (string linkResz in linkReszek)
                 {
-                    return linkResz.Replace("amp;", "").Replace("f=", "");
+                    if (linkResz.Contains("f="))
+                    {
+                        return linkResz.Replace("amp;", "").Replace("f=", "");
+                    }
                 }
+                throw new System.Exception("Invalid link");
             }
-            throw new System.Exception("Invalid link");
+            else
+            {
+                return Path.GetExtension(link);
+            }
         }
     }
 }

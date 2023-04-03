@@ -31,6 +31,7 @@ namespace Euractiv.Cikkek
 
         public override EuractivCikk EgyszeriKigyujtes(string url)
         {
+            //www.euractiv.ro/justitie/gabriel-oprea-achitat-in-prima-instanta-in-dosarul-privind-decesul-politistului-gigina-32964
             HtmlNode cikkNode = Kigyujto.StatikusKigyujtes(url, false).QuerySelector(".article");
             return new EuractivCikk(cikkNode);
         }
@@ -38,7 +39,7 @@ namespace Euractiv.Cikkek
         public CikkKategoria KategoriaKigyujtes(string url)
         {
             string[] urlReszek = url.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-            return new CikkKategoria(urlReszek[urlReszek.Length - 2]);
+            return new CikkKategoria(urlReszek[urlReszek.Length - 1]);
         }
 
         public override string UrlOldalSzammal(string url, int oldalSzam)
@@ -55,7 +56,15 @@ namespace Euractiv.Cikkek
                     "news",
                     "politic-intern",
                     "justitie",
-
+                    "economic",
+                    "social",
+                    "eu-elections-2019",
+                    "extern",
+                    "virtuality",
+                    "espresso",
+                    "coronavirus-covid19",
+                    "opinie",
+                    "prezidentiale"
                 };
             }
         }

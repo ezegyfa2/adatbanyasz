@@ -67,7 +67,7 @@ namespace AdatBanyaszForm
                     adevarulAdatKezelo.KigyujtesTarolasKategoriakkalAdatbazisba("adevarul.ro", int.Parse(pageCountTextBox.Text));
                     break;
                 case 1:
-                    Adatbazis.beallitas.Adatbazis = "euroactive";
+                    Adatbazis.beallitas.Adatbazis = "euroactiv";
                     EuractivCikkAdatKezelo euroactiveAdatKezelo = new EuractivCikkAdatKezelo();
                     euroactiveAdatKezelo.KigyujtesTarolasKategoriakkalAdatbazisba("euroactiv.ro", int.Parse(pageCountTextBox.Text));
                     break;

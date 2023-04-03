@@ -47,8 +47,13 @@ namespace Euractiv.Osszefoglalok
 
         protected override void kepBeallitas(HtmlNode node)
         {
-            string kepLink = HttpUtility.HtmlDecode(node.QuerySelector("img").Attributes["data-src"].Value);
-            Kep = new EuractivOsszefoglaloLetoltottKep(kepLink);
+            HtmlNode kepNode = node.QuerySelector("img");
+            if (kepNode != null)
+            {
+                string kepLink = HttpUtility.HtmlDecode(node.QuerySelector("img").Attributes["data-src"].Value);
+                Kep = new EuractivOsszefoglaloLetoltottKep(kepLink);
+            }
+
         }
 
         protected override void cimBeallitasa(HtmlNode node)

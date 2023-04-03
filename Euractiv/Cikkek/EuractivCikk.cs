@@ -96,8 +96,7 @@ namespace Euractiv.Cikkek
 
         protected override void cikkReszekBeallitasa(HtmlNode node)
         {
-            HtmlNode tagNode = node.QuerySelector("#node-eaopinion-full-group-keywords");
-            List<HtmlNode> tagParagrafusok = tagNode.QuerySelectorAll("p, h3, .caseta-background-articol").ToList();
+            List<HtmlNode> tagParagrafusok = tagParagrafusokLekerese(node);
             HtmlNode kommentNode = node.QuerySelector(".comentarii, #comments");
             List<HtmlNode> kommentParagrafusok = kommentNode.QuerySelectorAll("p, h3, .caseta-background-articol").ToList();
             List<HtmlNode> cikkReszNodek = node.QuerySelectorAll("p, h3, .caseta-background-articol").ToList();
@@ -134,6 +133,19 @@ namespace Euractiv.Cikkek
                     }
                     ++pozicio;
                 }
+            }
+        }
+
+        protected List<HtmlNode> tagParagrafusokLekerese(HtmlNode node)
+        {
+            HtmlNode tagNode = node.QuerySelector("#node-eaopinion-full-group-keywords");
+            if (tagNode == null)
+            {
+                return new List<HtmlNode>();
+            }
+            else
+            {
+                return tagNode.QuerySelectorAll("p, h3, .caseta-background-articol").ToList();
             }
         }
     }

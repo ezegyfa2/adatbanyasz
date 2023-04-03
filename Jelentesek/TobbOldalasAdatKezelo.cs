@@ -12,11 +12,10 @@ namespace Jelentesek
         public List<KigyujtendoAdatTipus> KigyujtesTarolasKategoriakkalAdatbazisba(string url, int oldalSzam = 1)
         {
             List<KigyujtendoAdatTipus> kigyujtottAdatok = new List<KigyujtendoAdatTipus>();
-            kigyujtottAdatok = TobbOldalasKigyujtesTarolasAdatbazisba(url + "/stiri-locale/bucuresti");
-            /*foreach (string kategoriaLinkResz in KategoriakLinkReszek)
+            foreach (string kategoriaLinkResz in KategoriakLinkReszek)
             {
                 kigyujtottAdatok.AddRange(TobbOldalasKigyujtesTarolasAdatbazisba(url + '/' + kategoriaLinkResz));
-            }*/
+            }
             return kigyujtottAdatok;
         }
 

@@ -30,7 +30,7 @@ namespace AdatBanyaszForm
                 "intellinews.com"
             });
             websiteComboBox.SelectedIndex = 0;
-            FajlKezelo.MAPPA_ELERESI_UTVONAL = "D:\\Projects\\Catalyst";
+            FajlKezelo.MAPPA_ELERESI_UTVONAL = "D:\\Projektek\\Ceg\\Erno\\Projekt filok";
         }
 
         private void pageCountTextBox_TextChanged(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace AdatBanyaszForm
                     adevarulAdatKezelo.KigyujtesTarolasKategoriakkalAdatbazisba("adevarul.ro", int.Parse(pageCountTextBox.Text));
                     break;
                 case 1:
-                    Adatbazis.beallitas.Adatbazis = "euroactiv";
+                    Adatbazis.beallitas.Adatbazis = "euroactive";
                     EuractivCikkAdatKezelo euroactiveAdatKezelo = new EuractivCikkAdatKezelo();
                     euroactiveAdatKezelo.KigyujtesTarolasKategoriakkalAdatbazisba("euroactiv.ro", int.Parse(pageCountTextBox.Text));
                     break;

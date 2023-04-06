@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,9 +59,24 @@ namespace JelentesKeszitoForm
                     }
                     break;
                 case 1:
-                    Adatbazis.beallitas.Adatbazis = "euractive";
-                    EuractivCikkJelentes euractiveJelentes = new EuractivCikkJelentes(categoryComboBox.SelectedItem.ToString());
-                    euractiveJelentes.Export();
+                    Adatbazis.beallitas.Adatbazis = "euroactive";
+                    EuractivCikkJelentes euroactiveJelentes;
+                    if (kivalasztottKategoria == "All")
+                    {
+                        euroactiveJelentes = new EuractivCikkJelentes();
+                    }
+                    else
+                    {
+                        euroactiveJelentes = new EuractivCikkJelentes(categoryComboBox.SelectedItem.ToString());
+                    }
+                    //adevarulJelentes.Export();
+
+                    List<CikkKategoria> euroactiveKategoriak = CikkKategoria.LekeresAdatbazisbol();
+                    foreach (CikkKategoria kategoria in euroactiveKategoriak)
+                    {
+                        euroactiveJelentes = new EuractivCikkJelentes(kategoria);
+                        euroactiveJelentes.Export(Path.Combine(pathTextBox.Text, kategoria.Nev + ".pdf"), false);
+                    }
                     break;
                 case 2:
                     Adatbazis.beallitas.Adatbazis = "intellinews";

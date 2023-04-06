@@ -15,6 +15,20 @@ namespace Jelentesek
     {
 
         public LetoltottKepTipus Kep;
+        public string KepID
+        {
+            get
+            {
+                if (Kep == null)
+                {
+                    return "NULL";
+                }
+                else
+                {
+                    return Kep.ID.ToString();
+                }
+            }
+        }
         public string Cim;
         public string Szoveg;
         public string Link;
@@ -43,7 +57,7 @@ namespace Jelentesek
                     Cim,
                     Szoveg,
                     Link,
-                    Kep.ID.ToString(),
+                    KepID,
                     Datum.ToString("yyyy-MM-dd HH:mm:ss"),
                 };
             }
@@ -97,7 +111,14 @@ namespace Jelentesek
 
         public override void AdatokBeallitasaReaderbol(MySqlDataReader reader)
         {
-            Kep = (LetoltottKepTipus)Activator.CreateInstance(typeof(LetoltottKepTipus), reader.GetInt32("image_id"));
+            try
+            {
+                Kep = (LetoltottKepTipus)Activator.CreateInstance(typeof(LetoltottKepTipus), reader.GetInt32("image_id"));
+            }
+            catch (Exception)
+            {
+                Kep = null;
+            }
             Cim = reader.GetString("title");
             Szoveg = reader.GetString("text");
             Link = reader.GetString("link");

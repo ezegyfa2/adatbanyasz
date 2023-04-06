@@ -17,7 +17,7 @@ namespace Euractiv.Cikkek
         {
         }
 
-        public EuractivCikkJelentes(CikkKategoria kategoria)
+        public EuractivCikkJelentes(CikkKategoria kategoria = null)
         {
             Kategoria = kategoria;
         }

@@ -22,6 +22,10 @@ namespace Euractiv.Cikkek
             foreach (EuractivOsszefoglalo cikkOsszefoglalo in cikkOsszefoglalok)
             {
                 EuractivCikk cikk = EgyszeriKigyujtes(cikkOsszefoglalo.Link);
+                if (cikkOsszefoglalo.Datum.Year == 1000)
+                {
+                    cikkOsszefoglalo.Datum = cikk.Datum;
+                }
                 cikk.Osszefoglalo = cikkOsszefoglalo;
                 cikk.Kategoria = KategoriaKigyujtes(url);
                 cikkek.Add(cikk);

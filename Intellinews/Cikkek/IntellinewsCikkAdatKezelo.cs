@@ -31,14 +31,14 @@ namespace Intellinews.Cikkek
 
         public override IntellinewsCikk EgyszeriKigyujtes(string url)
         {
-            HtmlNode cikkNode = Kigyujto.StatikusKigyujtes(url, false).QuerySelector(".article");
+            HtmlNode cikkNode = Kigyujto.StatikusKigyujtes(url, false).QuerySelector(".mainContent");
             return new IntellinewsCikk(cikkNode);
         }
 
         public CikkKategoria KategoriaKigyujtes(string url)
         {
             string[] urlReszek = url.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-            return new CikkKategoria(urlReszek[urlReszek.Length - 2]);
+            return new CikkKategoria(urlReszek[urlReszek.Length - 1]);
         }
 
         public override string UrlOldalSzammal(string url, int oldalSzam)

@@ -15,6 +15,7 @@ using Euractiv.Cikkek;
 using Intellinews.Cikkek;
 using SegedFunkciok;
 using System.IO;
+using Financialintelligence.Cikkek;
 
 namespace AdatBanyaszForm
 {
@@ -27,7 +28,8 @@ namespace AdatBanyaszForm
             {
                 "adevarul.ro",
                 "euractive.ro",
-                "intellinews.com"
+                "intellinews.com",
+                "financialintelligence.ro"
             });
             websiteComboBox.SelectedIndex = 0;
             FajlKezelo.MAPPA_ELERESI_UTVONAL = "D:\\Projektek\\Ceg\\Erno\\Projekt filok";
@@ -75,6 +77,11 @@ namespace AdatBanyaszForm
                     Adatbazis.beallitas.Adatbazis = "intellinews";
                     IntellinewsCikkAdatKezelo intellinewsAdatKezelo = new IntellinewsCikkAdatKezelo();
                     intellinewsAdatKezelo.KigyujtesTarolasKategoriakkalAdatbazisba("intellinews.com", int.Parse(pageCountTextBox.Text));
+                    break;
+                case 3:
+                    Adatbazis.beallitas.Adatbazis = "financialintelligence";
+                    FinancialintelligenceCikkAdatKezelo financialintelligenceCikkAdatKezeloAdatKezelo = new FinancialintelligenceCikkAdatKezelo();
+                    financialintelligenceCikkAdatKezeloAdatKezelo.KigyujtesTarolasKategoriakkalAdatbazisba("financialintelligence.ro", int.Parse(pageCountTextBox.Text));
                     break;
                 default:
                     MessageBox.Show("Must select a website.");

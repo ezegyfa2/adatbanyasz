@@ -41,14 +41,14 @@ namespace JelentesKeszitoForm
                 case 0:
                     Adatbazis.beallitas.Adatbazis = "adevarul";
                     AdevarulCikkJelentes adevarulJelentes;
-                    if (kivalasztottKategoria == "All")
+                    /*if (kivalasztottKategoria == "All")
                     {
                         adevarulJelentes = new AdevarulCikkJelentes();
                     }
                     else
                     {
                         adevarulJelentes = new AdevarulCikkJelentes(categoryComboBox.SelectedItem.ToString());
-                    }
+                    }*/
                     //adevarulJelentes.Export();
 
 
@@ -98,6 +98,9 @@ namespace JelentesKeszitoForm
                     break;
                 case 1:
                     Adatbazis.beallitas.Adatbazis = "euroactive";
+                    break;
+                case 2:
+                    Adatbazis.beallitas.Adatbazis = "intellinews";
                     break;
                 default:
                     MessageBox.Show("Must select a website.");

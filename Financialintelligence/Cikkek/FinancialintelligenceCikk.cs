@@ -1,6 +1,6 @@
 ﻿using Jelentesek;
 using SegedFunkciok;
-using Intellinews.Osszefoglalok;
+using Financialintelligence.Osszefoglalok;
 
 using HtmlAgilityPack;
 using MySql.Data.MySqlClient;
@@ -11,21 +11,21 @@ using System.Linq;
 using System.Web;
 using System.IO;
 
-namespace Intellinews.Cikkek
+namespace Financialintelligence.Cikkek
 {
-    public class IntellinewsCikk : Cikk<IntellinewsOsszefoglalo, IntellinewsCikkLetoltottKep>
+    public class FinancialintelligenceCikk : Cikk<FinancialintelligenceOsszefoglalo, FinancialintelligenceCikkLetoltottKep>
     {
         public static readonly string MAPPA_ELERESI_UTVONAL = Path.Combine(FajlKezelo.MAPPA_ELERESI_UTVONAL, "Intellinews", "Cikkek");
 
-        public IntellinewsCikk()
+        public FinancialintelligenceCikk()
         {
         }
 
-        public IntellinewsCikk(HtmlNode node) : base(node)
+        public FinancialintelligenceCikk(HtmlNode node) : base(node)
         {
         }
 
-        public IntellinewsCikk(MySqlDataReader reader) : base(reader)
+        public FinancialintelligenceCikk(MySqlDataReader reader) : base(reader)
         {
         }
 
@@ -38,47 +38,26 @@ namespace Intellinews.Cikkek
             }
             else
             {
-                string kepLink = "https:" + HttpUtility.HtmlDecode(node.QuerySelector("img").Attributes["src"].Value);
-                Kep = new IntellinewsCikkLetoltottKep(kepLink);
+                string kepLink = HttpUtility.HtmlDecode(kepNode.Attributes["src"].Value);
+                Kep = new FinancialintelligenceCikkLetoltottKep(kepLink);
             }
         }
 
         protected override void focimBeallitasa(HtmlNode node)
         {
-            HtmlNode cimNode = node.QuerySelector("h1.subtitle");
+            HtmlNode cimNode = node.QuerySelector("header > h1");
             Focim = cimNode.InnerText;
             Focim = HttpUtility.HtmlDecode(Focim);
         }
 
         protected override void datumBeallitasa(HtmlNode node)
         {
-            string datumSzoveg = HttpUtility.HtmlDecode(datumNode(node).InnerText);
-            string[] datumSzovegReszek = datumSzoveg.Trim().Split(',');
-            if (datumSzovegReszek.Length == 1)
-            {
-                Datum = DateTime.ParseExact(datumSzoveg.Trim(), "H:m", null);
-            }
-            else
-            {
-                string honapSzoveg = datumSzovegReszek[0].Split(' ')[0];
-                int ev = Int32.Parse(datumSzovegReszek[1]);
-                int honap = Honapok().FindIndex(aktHonap => aktHonap == honapSzoveg);
-                int nap = Int32.Parse(datumSzovegReszek[0].Split(' ')[1]);
-                Datum = new DateTime(ev, honap + 1, nap);
-            }
-        }
-
-        protected HtmlNode datumNode(HtmlNode node)
-        {
-            List<HtmlNode> kivalasztottNodek = node.QuerySelectorAll("span.date").ToList();
-            foreach (HtmlNode kivalasztottNode in kivalasztottNodek)
-            {
-                if (kivalasztottNode.ParentNode.QuerySelectorAll("span").Count() == 2)
-                {
-                    return kivalasztottNode;
-                }
-            }
-            throw new Exception("Nincs datum node");
+            string datumSzoveg = HttpUtility.HtmlDecode(node.QuerySelector("header").QuerySelector("time").InnerText);
+            string[] datumSzovegReszek = datumSzoveg.Trim().Split('.');
+            int ev = Int32.Parse(datumSzovegReszek[2]);
+            int honap = Int32.Parse(datumSzovegReszek[1]);
+            int nap = Int32.Parse(datumSzovegReszek[0]);
+            Datum = new DateTime(ev, honap, nap);
         }
 
         // A csv kiirasnal fontos hogy ne adattag legyen
@@ -103,7 +82,9 @@ namespace Intellinews.Cikkek
 
         protected override void cikkReszekBeallitasa(HtmlNode node)
         {
-            HtmlNode contentNode = node.QuerySelector(".searchHighlight");
+            HtmlNode contentNode = node.QuerySelector(".entry-content");
+            HtmlNode socialPanelNode = node.QuerySelector(".swp_social_panel");
+            List<HtmlNode> socialPanelSzovegek = socialPanelNode.QuerySelectorAll("p").ToList();
             List<HtmlNode> cimNodek = contentNode.QuerySelectorAll("strong").ToList();
             List<HtmlNode> cikkReszNodek = contentNode.QuerySelectorAll("p, h3").ToList();
             int pozicio = 0;

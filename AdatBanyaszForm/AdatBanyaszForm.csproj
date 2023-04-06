@@ -96,6 +96,10 @@
       <Project>{d05ab32c-e8cd-4510-9318-69231a535483}</Project>
       <Name>Euractiv</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Financialintelligence\Financialintelligence.csproj">
+      <Project>{078b108c-c10b-4e6f-9e04-d5860b908b68}</Project>
+      <Name>Financialintelligence</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Intellinews\Intellinews.csproj">
       <Project>{5d5d318f-4d53-4dae-887f-b6f55094f050}</Project>
       <Name>Intellinews</Name>

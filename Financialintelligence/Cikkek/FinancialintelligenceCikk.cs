@@ -10,12 +10,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Financialintelligence.Cikkek
 {
     public class FinancialintelligenceCikk : Cikk<FinancialintelligenceOsszefoglalo, FinancialintelligenceCikkLetoltottKep>
     {
-        public static readonly string MAPPA_ELERESI_UTVONAL = Path.Combine(FajlKezelo.MAPPA_ELERESI_UTVONAL, "Intellinews", "Cikkek");
+        public static readonly string MAPPA_ELERESI_UTVONAL = Path.Combine(FajlKezelo.MAPPA_ELERESI_UTVONAL, "FinancialIntelligence", "Cikkek");
 
         public FinancialintelligenceCikk()
         {
@@ -52,11 +53,11 @@ namespace Financialintelligence.Cikkek
 
         protected override void datumBeallitasa(HtmlNode node)
         {
-            string datumSzoveg = HttpUtility.HtmlDecode(node.QuerySelector("header").QuerySelector("time").InnerText);
-            string[] datumSzovegReszek = datumSzoveg.Trim().Split('.');
-            int ev = Int32.Parse(datumSzovegReszek[2]);
+            string datumSzoveg = HttpUtility.HtmlDecode(node.QuerySelector("header").QuerySelector("time").Attributes["datetime"].Value);
+            string[] datumSzovegReszek = datumSzoveg.Trim().Split('T')[0].Split('-');
+            int ev = Int32.Parse(datumSzovegReszek[0]);
             int honap = Int32.Parse(datumSzovegReszek[1]);
-            int nap = Int32.Parse(datumSzovegReszek[0]);
+            int nap = Int32.Parse(datumSzovegReszek[2]);
             Datum = new DateTime(ev, honap, nap);
         }
 
@@ -82,47 +83,42 @@ namespace Financialintelligence.Cikkek
 
         protected override void cikkReszekBeallitasa(HtmlNode node)
         {
-            HtmlNode contentNode = node.QuerySelector(".entry-content");
-            HtmlNode socialPanelNode = node.QuerySelector(".swp_social_panel");
-            List<HtmlNode> socialPanelSzovegek = socialPanelNode.QuerySelectorAll("p").ToList();
-            List<HtmlNode> cimNodek = contentNode.QuerySelectorAll("strong").ToList();
-            List<HtmlNode> cikkReszNodek = contentNode.QuerySelectorAll("p, h3").ToList();
-            int pozicio = 0;
-            foreach (HtmlNode cikkReszNode in cikkReszNodek)
+            HtmlNode cikkNode = node.QuerySelector("article > .entry-content");
+            HtmlNode socialPanelNode = cikkNode.QuerySelector(".swp_social_panel");
+            string cikkSzoveg = cikkNode.InnerText;
+            cikkSzoveg = cikkSzoveg.Replace(socialPanelNode.InnerText, "");
+            cikkSzoveg = Regex.Replace(cikkSzoveg, "<!--[^<]*-->", "");
+
+            List<string> cimek = cikkNode.QuerySelectorAll("strong, h3").Select(cimNode => cimNode.InnerText).ToList();
+            if (cimek.Count == 0)
             {
-                if (cikkReszNode.Name == "p")
+                string bekezdesSzoveg = HttpUtility.HtmlDecode(cikkSzoveg);
+                Bekezdesek.Add(new CikkBekezdes(bekezdesSzoveg, 0, this));
+            }
+            else
+            {
+                int pozicio = 0;
+                foreach (string cim in cimek)
                 {
-                    if (cimNode(cikkReszNode, cimNodek))
+                    int cimPozicio = cikkSzoveg.IndexOf(cim);
+                    if (cimPozicio == -1)
                     {
-                        Cimek.Add(new CikkCim(HttpUtility.HtmlDecode(cikkReszNode.InnerText), pozicio, this));
+                        throw new Exception("Hibas cim");
                     }
                     else
                     {
-                        Bekezdesek.Add(new CikkBekezdes(HttpUtility.HtmlDecode(cikkReszNode.InnerText), pozicio, this));
+                        if (cimPozicio > 0)
+                        {
+                            string bekezdesSzoveg = HttpUtility.HtmlDecode(cikkSzoveg.Substring(0, cimPozicio));
+                            Bekezdesek.Add(new CikkBekezdes(bekezdesSzoveg, pozicio, this));
+                            ++pozicio;
+                        }
+                        Cimek.Add(new CikkCim(HttpUtility.HtmlDecode(cim), pozicio, this));
+                        ++pozicio;
+                        cikkSzoveg = cikkSzoveg.Substring(cimPozicio + cim.Length);
                     }
                 }
-                else if (cikkReszNode.Name == "h2" || cikkReszNode.Name == "h3")
-                {
-                    Cimek.Add(new CikkCim(HttpUtility.HtmlDecode(cikkReszNode.InnerText), pozicio, this));
-                }
-                else
-                {
-                    throw new Exception("Invalid node type");
-                }
-                ++pozicio;
             }
-        }
-
-        protected bool cimNode(HtmlNode cikkReszNode, List<HtmlNode> cimNodek)
-        {
-            foreach (HtmlNode cimNode in cimNodek) 
-            { 
-                if (cimNode.InnerText == cikkReszNode.InnerText) 
-                { 
-                    return true; 
-                }
-            }
-            return false;
         }
     }
 }

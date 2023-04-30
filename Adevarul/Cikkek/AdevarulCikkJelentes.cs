@@ -55,7 +55,7 @@ namespace Adevarul.Cikkek
                 Paragraph ujSor = ExportalhatoAdat.ExportUjSor(exportalandoDokumentum);
                 ujSor.Style = "focim";
             }
-            FormazottSzovegExportalasa(exportalandoDokumentum, "HETI GAZDASÁG", "focim");
+            FormazottSzovegExportalasa(exportalandoDokumentum, "NEWS REPORT", "focim");
             FormazottSzovegExportalasa(exportalandoDokumentum, kezdetiDatum.ToShortDateString() + " - " + vegsoDatum.ToShortDateString(), "alcim");
             for (int i = 0; i < 4; ++i)
                 ExportalhatoAdat.ExportUjSor(exportalandoDokumentum);

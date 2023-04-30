@@ -9,13 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-using Adevarul.Cikkek;
 using AdatbazisFunkciok;
-using Euractiv.Cikkek;
 using Intellinews.Cikkek;
 using SegedFunkciok;
 using System.IO;
-using Financialintelligence.Cikkek;
+using Adevarul.Cikkek;
 
 namespace AdatBanyaszForm
 {
@@ -24,14 +22,6 @@ namespace AdatBanyaszForm
         public BanyaszForm()
         {
             InitializeComponent();
-            websiteComboBox.Items.AddRange(new string[]
-            {
-                "adevarul.ro",
-                "euractive.ro",
-                "intellinews.com",
-                "financialintelligence.ro"
-            });
-            websiteComboBox.SelectedIndex = 0;
             FajlKezelo.MAPPA_ELERESI_UTVONAL = "D:\\Projects\\Catalyst";
         }
 
@@ -61,37 +51,16 @@ namespace AdatBanyaszForm
 
         private void collectButton_Click(object sender, EventArgs e)
         {
-            switch (websiteComboBox.SelectedIndex)
-            {
-                case 0:
-                    Adatbazis.beallitas.Adatbazis = "adevarul";
-                    AdevarulCikkAdatKezelo adevarulAdatKezelo = new AdevarulCikkAdatKezelo();
-                    adevarulAdatKezelo.KigyujtesTarolasKategoriakkalAdatbazisba("adevarul.ro", int.Parse(pageCountTextBox.Text));
-                    break;
-                case 1:
-                    Adatbazis.beallitas.Adatbazis = "euroactiv";
-                    EuractivCikkAdatKezelo euroactiveAdatKezelo = new EuractivCikkAdatKezelo();
-                    euroactiveAdatKezelo.KigyujtesTarolasKategoriakkalAdatbazisba("euroactiv.ro", int.Parse(pageCountTextBox.Text));
-                    break;
-                case 2:
-                    Adatbazis.beallitas.Adatbazis = "intellinews";
-                    IntellinewsCikkAdatKezelo intellinewsAdatKezelo = new IntellinewsCikkAdatKezelo();
-                    intellinewsAdatKezelo.KigyujtesTarolasKategoriakkalAdatbazisba("intellinews.com", int.Parse(pageCountTextBox.Text));
-                    break;
-                case 3:
-                    Adatbazis.beallitas.Adatbazis = "financialintelligence";
-                    FinancialintelligenceCikkAdatKezelo financialintelligenceCikkAdatKezeloAdatKezelo = new FinancialintelligenceCikkAdatKezelo();
-                    financialintelligenceCikkAdatKezeloAdatKezelo.KigyujtesTarolasKategoriakkalAdatbazisba("financialintelligence.ro", int.Parse(pageCountTextBox.Text));
-                    break;
-                default:
-                    MessageBox.Show("Must select a website.");
-                    break;
-            }
+            Adatbazis.beallitas.Adatbazis = "adevarul";
+            AdevarulCikkAdatKezelo aAdatKezelo = new AdevarulCikkAdatKezelo();
+            aAdatKezelo.KigyujtesTarolasKategoriakkalAdatbazisba("adevarul.ro", int.Parse(pageCountTextBox.Text));
+            //IntellinewsCikkAdatKezelo intellinewsAdatKezelo = new IntellinewsCikkAdatKezelo();
+            //intellinewsAdatKezelo.KigyujtesTarolasKategoriakkalAdatbazisba("intellinews.com", int.Parse(pageCountTextBox.Text));
         }
 
-        private void BanyaszForm_Load(object sender, EventArgs e)
+        private void exportPathTextBox_TextChanged(object sender, EventArgs e)
         {
-
+            FajlKezelo.MAPPA_ELERESI_UTVONAL = exportPathTextBox.Text;
         }
     }
 }

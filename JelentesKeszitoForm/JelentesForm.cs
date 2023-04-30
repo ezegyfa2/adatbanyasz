@@ -1,7 +1,5 @@
 ﻿using AdatbazisFunkciok;
 using Adevarul.Cikkek;
-using Euractiv.Cikkek;
-using Euractiv.Osszefoglalok;
 using Intellinews.Cikkek;
 using Jelentesek;
 using SegedFunkciok;
@@ -19,84 +17,41 @@ namespace JelentesKeszitoForm
 {
     public partial class JelentesForm : Form
     {
+        List<CikkKategoria> kategoriak;
+
         public JelentesForm()
         {
             InitializeComponent();
-            websiteComboBox.Items.AddRange(new string[]
+            Adatbazis.beallitas.Adatbazis = "adevarul";
+            categoryComboBox.Items.Clear();
+            categoryComboBox.Items.Add("All");
+            kategoriak = CikkKategoria.LekeresAdatbazisbol();
+            foreach (CikkKategoria kategoria in kategoriak)
             {
-                "adevarul.ro",
-                "euractive.ro",
-                "intellinews.com"
-            });
-            websiteComboBox.SelectedIndex = 0;
+                categoryComboBox.Items.Add(kategoria.Nev);
+            }
             pathTextBox.Text = "D:\\Projects\\Catalyst";
         }
 
         private void createButton_Click(object sender, EventArgs e)
         {
             string kivalasztottKategoria = categoryComboBox.SelectedItem.ToString();
-            switch (websiteComboBox.SelectedIndex)
+            AdevarulCikkJelentes jelentes;
+            if (kivalasztottKategoria == "All")
             {
-                case 0:
-                    Adatbazis.beallitas.Adatbazis = "adevarul";
-                    AdevarulCikkJelentes adevarulJelentes;
-                    /*if (kivalasztottKategoria == "All")
-                    {
-                        adevarulJelentes = new AdevarulCikkJelentes();
-                    }
-                    else
-                    {
-                        adevarulJelentes = new AdevarulCikkJelentes(categoryComboBox.SelectedItem.ToString());
-                    }*/
-                    //adevarulJelentes.Export();
-
-
-                    List<CikkKategoria> kategoriak = CikkKategoria.LekeresAdatbazisbol();
-                    foreach (CikkKategoria kategoria in kategoriak) {
-                        adevarulJelentes = new AdevarulCikkJelentes(kategoria);
-                        adevarulJelentes.Export(kategoria.Nev + ".pdf", false);
-                    }
-                    break;
-                case 1:
-                    Adatbazis.beallitas.Adatbazis = "euractive";
-                    EuractivCikkJelentes euractiveJelentes = new EuractivCikkJelentes(categoryComboBox.SelectedItem.ToString());
-                    euractiveJelentes.Export();
-                    break;
-                case 2:
-                    Adatbazis.beallitas.Adatbazis = "intellinews";
-                    IntellinewsCikkJelentes intellinewsJelentes = new IntellinewsCikkJelentes(categoryComboBox.SelectedItem.ToString());
-                    intellinewsJelentes.Export();
-                    break;
-                default:
-                    MessageBox.Show("Must select a website.");
-                    break;
+                /*foreach (CikkKategoria kategoria in kategoriak)
+                {
+                    jelentes = new AdevarulCikkJelentes(kategoria);
+                    jelentes.Export(kategoria.Nev + ".pdf", false);
+                }*/
+                jelentes = new AdevarulCikkJelentes(kategoriak[categoryComboBox.SelectedIndex]);
+                jelentes.Export();
             }
-        }
-
-        private void websiteComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (websiteComboBox.SelectedIndex)
+            else
             {
-                case 0:
-                    Adatbazis.beallitas.Adatbazis = "adevarul";
-                    break;
-                case 1:
-                    Adatbazis.beallitas.Adatbazis = "euroactive";
-                    break;
-                case 2:
-                    Adatbazis.beallitas.Adatbazis = "intellinews";
-                    break;
-                default:
-                    MessageBox.Show("Must select a website.");
-                    break;
+                jelentes = new AdevarulCikkJelentes(kategoriak[categoryComboBox.SelectedIndex]);
+                jelentes.Export();
             }
-            categoryComboBox.Items.Clear();
-            categoryComboBox.Items.Add("All");
-            foreach (CikkKategoria kategoria in CikkKategoria.LekeresAdatbazisbol())
-            {
-                categoryComboBox.Items.Add(kategoria.Nev);
-            }
-            categoryComboBox.SelectedIndex = 0;
         }
 
         private void pathTextBox_TextChanged(object sender, EventArgs e)

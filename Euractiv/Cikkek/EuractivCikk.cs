@@ -79,13 +79,13 @@ namespace Euractiv.Cikkek
         {
             return new List<string>()
             {
-                "Jan",
+                "Ian",
                 "Feb",
                 "Mar",
                 "Apr",
                 "Mai",
-                "Jun",
-                "Jul",
+                "Iun",
+                "Iul",
                 "Aug",
                 "Sept",
                 "Oct",
@@ -97,8 +97,7 @@ namespace Euractiv.Cikkek
         protected override void cikkReszekBeallitasa(HtmlNode node)
         {
             List<HtmlNode> tagParagrafusok = tagParagrafusokLekerese(node);
-            HtmlNode kommentNode = node.QuerySelector(".comentarii, #comments");
-            List<HtmlNode> kommentParagrafusok = kommentNode.QuerySelectorAll("p, h3, .caseta-background-articol").ToList();
+            List<HtmlNode> kommentParagrafusok = kommentNodek(node);
             List<HtmlNode> cikkReszNodek = node.QuerySelectorAll("p, h3, .caseta-background-articol").ToList();
             int pozicio = 0;
             foreach (HtmlNode cikkReszNode in cikkReszNodek)
@@ -133,6 +132,19 @@ namespace Euractiv.Cikkek
                     }
                     ++pozicio;
                 }
+            }
+        }
+
+        protected List<HtmlNode> kommentNodek(HtmlNode node)
+        {
+            HtmlNode kommentNode = node.QuerySelector(".comentarii, #comments");
+            if (kommentNode == null)
+            {
+                return new List<HtmlNode>();
+            }
+            else
+            {
+                return kommentNode.QuerySelectorAll("p, h3, .caseta-background-articol").ToList();
             }
         }
 

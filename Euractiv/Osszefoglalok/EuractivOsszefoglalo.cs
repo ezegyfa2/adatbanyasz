@@ -95,13 +95,13 @@ namespace Euractiv.Osszefoglalok
         {
             return new List<string>()
             {
-                "Jan",
+                "Ian",
                 "Feb",
                 "Mar",
                 "Apr",
                 "Mai",
-                "Jun",
-                "Jul",
+                "Iun",
+                "Iul",
                 "Aug",
                 "Sept",
                 "Oct",

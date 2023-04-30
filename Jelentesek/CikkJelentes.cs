@@ -9,7 +9,7 @@ namespace Jelentesek
 {
     abstract public class CikkJelentes<HirTipus> : Jelentes<HirTipus> where HirTipus : ExportalhatoAdat, new()
     {
-        public override void Export(List<HirTipus> exportalandoAdatok, DateTime kezdetiDatum, DateTime vegsoDatum, string fileNev = "Sajto jelentes.pdf", bool megnyitasExportUtan = true)
+        public override void Export(List<HirTipus> exportalandoAdatok, DateTime kezdetiDatum, DateTime vegsoDatum, string fileNev = "Report.pdf", bool megnyitasExportUtan = true)
         {
             Document exportalandoDokumentum = new Document();
             exportalandoDokumentum.AddSection();
@@ -32,7 +32,7 @@ namespace Jelentesek
                 Paragraph ujSor = ExportalhatoAdat.ExportUjSor(exportalandoDokumentum);
                 ujSor.Style = "focim";
             }
-            FormazottSzovegExportalasa(exportalandoDokumentum, "HETI GAZDASÁG", "focim");
+            FormazottSzovegExportalasa(exportalandoDokumentum, "NEWS REPORT", "focim");
             FormazottSzovegExportalasa(exportalandoDokumentum, kezdetiDatum.ToShortDateString() + " - " + vegsoDatum.ToShortDateString(), "alcim");
             for (int i = 0; i < 4; ++i)
                 ExportalhatoAdat.ExportUjSor(exportalandoDokumentum);

@@ -76,13 +76,13 @@ namespace Adevarul.Cikkek
         {
             return new List<string>()
             {
-                "jan.",
+                "ian.",
                 "feb.",
-                "marc.",
+                "mart.",
                 "apr.",
                 "mai.",
-                "jun.",
-                "jul.",
+                "iun.",
+                "iul.",
                 "aug.",
                 "sept.",
                 "okt.",
@@ -92,11 +92,7 @@ namespace Adevarul.Cikkek
         }
 
         protected override void cikkReszekBeallitasa(HtmlNode node)
-        { 
-            if (Focim.Contains("Elevii și studenții din București se pot programa online"))
-            {
-
-            }
+        {
             List<HtmlNode> cikkReszNodek = node.QuerySelectorAll("main > p, main > h2").OrderBy(cikkReszNode => cikkReszNode.StreamPosition).ToList();
             int pozicio = 0;
             foreach (HtmlNode cikkReszNode in cikkReszNodek)

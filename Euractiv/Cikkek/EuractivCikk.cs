@@ -32,13 +32,13 @@ namespace Euractiv.Cikkek
         protected override void kepBeallitas(HtmlNode node)
         {
             HtmlNode kepNode = node.QuerySelector("img");
-            if (kepNode == null)
+            if (kepNode == null || kepNode.Attributes["src"] == null)
             {
                 Kep = null;
             }
             else
             {
-                string kepLink = HttpUtility.HtmlDecode(node.QuerySelector("img").Attributes["src"].Value);
+                string kepLink = HttpUtility.HtmlDecode(kepNode.Attributes["src"].Value);
                 Kep = new EuractivCikkLetoltottKep(kepLink);
             }
         }
@@ -131,6 +131,27 @@ namespace Euractiv.Cikkek
                         throw new Exception("Invalid node type");
                     }
                     ++pozicio;
+                }
+            }
+        }
+
+        protected List<HtmlNode> kommentNodek(HtmlNode node)
+        {
+            HtmlNode kommentNode = node.QuerySelector(".comentarii, #comments");
+            if (kommentNode == null)
+            {
+                return new List<HtmlNode>();
+            }
+            else
+            {
+                var kommentParagrafusok = kommentNode.QuerySelectorAll("p, h3, .caseta-background-articol");
+                if (kommentParagrafusok == null)
+                {
+                    return new List<HtmlNode>();
+                }
+                else
+                {
+                    return kommentParagrafusok.ToList();
                 }
             }
         }

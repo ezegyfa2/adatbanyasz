@@ -22,7 +22,7 @@ namespace AdatBanyaszForm
         public BanyaszForm()
         {
             InitializeComponent();
-            FajlKezelo.MAPPA_ELERESI_UTVONAL = "D:\\Projects\\Catalyst";
+            FajlKezelo.MAPPA_ELERESI_UTVONAL = "D:\\Projektek\\Ceg\\Erno\\Projekt filok";
         }
 
         private void pageCountTextBox_TextChanged(object sender, EventArgs e)

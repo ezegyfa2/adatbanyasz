@@ -74,19 +74,27 @@ namespace Euractiv.Osszefoglalok
 
         protected override void datumBeallitasa(HtmlNode node)
         {
-            string datumSzoveg = HttpUtility.HtmlDecode(node.QuerySelector("span.teaser-timestamp").InnerText);
-            string[] datumSzovegReszek = datumSzoveg.Trim().Split(' ');
-            if (datumSzovegReszek.Length == 1)
+            HtmlNode datumNode = node.QuerySelector("span.teaser-timestamp");
+            if (datumNode == null)
             {
-                Datum = DateTime.ParseExact(datumSzoveg.Trim(), "H:m", null);
+                Datum = new DateTime(1000, 1, 1);
             }
             else
             {
-                string honapSzoveg = datumSzovegReszek[1];
-                int ev = Int32.Parse(datumSzovegReszek[2]);
-                int honap = Honapok().FindIndex(aktHonap => aktHonap == honapSzoveg);
-                int nap = Int32.Parse(datumSzovegReszek[0]);
-                Datum = new DateTime(ev, honap + 1, nap);
+                string datumSzoveg = HttpUtility.HtmlDecode(datumNode.InnerText);
+                string[] datumSzovegReszek = datumSzoveg.Trim().Split(' ');
+                if (datumSzovegReszek.Length == 1)
+                {
+                    Datum = DateTime.ParseExact(datumSzoveg.Trim(), "H:m", null);
+                }
+                else
+                {
+                    string honapSzoveg = datumSzovegReszek[1];
+                    int ev = Int32.Parse(datumSzovegReszek[2]);
+                    int honap = Honapok().FindIndex(aktHonap => aktHonap == honapSzoveg);
+                    int nap = Int32.Parse(datumSzovegReszek[0]);
+                    Datum = new DateTime(ev, honap + 1, nap);
+                }
             }
         }
 

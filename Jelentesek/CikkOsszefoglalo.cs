@@ -15,6 +15,20 @@ namespace Jelentesek
     {
 
         public LetoltottKepTipus Kep;
+        public string KepID
+        {
+            get
+            {
+                if (Kep == null)
+                {
+                    return "NULL";
+                }
+                else
+                {
+                    return Kep.ID.ToString();
+                }
+            }
+        }
         public string Cim;
         public string Szoveg;
         public string Link;
@@ -103,7 +117,7 @@ namespace Jelentesek
             }
             catch (Exception ex)
             {
-
+                Kep = null;
             }
             Cim = reader.GetString("title");
             Szoveg = reader.GetString("text");
